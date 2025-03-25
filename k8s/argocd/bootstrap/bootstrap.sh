@@ -28,7 +28,7 @@ done
 argocd login --insecure localhost:8081
 
 argocd repo add https://github.com/t-ash0410/try-k8s.git \
-  --username t-ash0410 \
+  --username $GITHUB_USER \
   --password $GITHUB_PAT
 
 ######################### Apply Bootstrap #########################
