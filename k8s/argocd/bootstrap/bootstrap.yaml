@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd-bootstrap-project
+  namespace: argocd
+spec:
+  sourceRepos:
+    - "https://github.com/t-ash0410/try-k8s.git"
+  destinations:
+    - namespace: "*"
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-bootstrap-app
+  namespace: argocd
+spec:
+  project: argocd-bootstrap-project
+  source:
+    repoURL: https://github.com/t-ash0410/try-k8s.git
+    targetRevision: main
+    path: k8s/argocd/init
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+

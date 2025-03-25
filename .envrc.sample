@@ -1,0 +1,5 @@
+use flake
+
+export ARGOCD_OPTS='--port-forward-namespace argocd'
+export GITHUB_USER=<YOUR_GITHUB_USER_ID>
+export GITHUB_PAT=<YOUR_GITHUB_PAT>
