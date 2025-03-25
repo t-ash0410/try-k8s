@@ -16,6 +16,7 @@
           packages = with pkgs; [
             kubectl
             k9s
+            minikube
           ];
         };
       }
