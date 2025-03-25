@@ -1,0 +1,7 @@
+projects:
+  - name: httpd
+    path: k8s/argocd/resources/httpd
+    enabled: true
+  - name: nginx
+    path: k8s/argocd/resources/nginx
+    enabled: true
