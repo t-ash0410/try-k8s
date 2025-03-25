@@ -21,7 +21,7 @@ metadata:
   name: argocd-bootstrap-app
   namespace: argocd
 spec:
-  project: argocd-bootstrap
+  project: argocd-bootstrap-project
   source:
     repoURL: https://github.com/t-ash0410/try-k8s.git
     targetRevision: main

@@ -17,6 +17,7 @@
             kubectl
             k9s
             minikube
+            argocd
           ];
         };
       }
