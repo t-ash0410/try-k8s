@@ -18,6 +18,7 @@
             k9s
             minikube
             argocd
+            helm
           ];
         };
       }
