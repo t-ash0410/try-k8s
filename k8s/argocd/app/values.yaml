@@ -1,10 +1,10 @@
 projects:
   - name: httpd
-    path: k8s/argocd/resources/httpd
+    path: k8s/resources/httpd
     enabled: true
   - name: nginx
-    path: k8s/argocd/resources/nginx
+    path: k8s/resources/nginx
     enabled: true
   - name: bookinfo
-    path: k8s/argocd/resources/bookinfo
+    path: k8s/resources/bookinfo
     enabled: true
