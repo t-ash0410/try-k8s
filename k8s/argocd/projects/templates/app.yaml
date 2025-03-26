@@ -1,8 +1,19 @@
+{{- range .Values.projects }}
+{{- if .enabled }}
+{{- $name := .name }}
+{{- $path := .path }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $name }}
+...
+---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: argocd-bootstrap-project
-  namespace: argocd
+  name: {{ $name }}
+  namespace: {{ $name }}
 spec:
   sourceRepos:
     - "https://github.com/t-ash0410/try-k8s.git"
@@ -12,25 +23,23 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
-
+...
 ---
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-bootstrap-app
-  namespace: argocd
+  name: {{ $name }}
 spec:
-  project: argocd-bootstrap-project
+  destination:
+    namespace: {{ $name }}
+    server: https://kubernetes.default.svc
+  project: {{ $name }}
   source:
+    path: {{ $path }}
     repoURL: https://github.com/t-ash0410/try-k8s.git
     targetRevision: main
-    path: k8s/argocd/projects
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-
+    automated: {}
+...
+{{- end }}
+{{- end }}

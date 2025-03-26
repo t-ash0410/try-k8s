@@ -1,0 +1,254 @@
+---
+# Source: bookinfo/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: details
+  labels:
+    app: details
+    service: details
+spec:
+  ports:
+  - name: details-9080
+    port: 9080
+  selector:
+    app: details
+...
+---
+# Source: bookinfo/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ratings
+  labels:
+    app: ratings
+    service: ratings
+spec:
+  ports:
+  - name: ratings-9080
+    port: 9080
+  selector:
+    app: ratings
+...
+---
+# Source: bookinfo/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviews
+  labels:
+    app: reviews
+    service: reviews
+spec:
+  ports:
+  - name: reviews-9080
+    port: 9080
+  selector:
+    app: reviews
+...
+---
+# Source: bookinfo/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviews
+  labels:
+    app: reviews
+    service: reviews
+spec:
+  ports:
+  - name: reviews-9080
+    port: 9080
+  selector:
+    app: reviews
+...
+---
+# Source: bookinfo/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviews
+  labels:
+    app: reviews
+    service: reviews
+spec:
+  ports:
+  - name: reviews-9080
+    port: 9080
+  selector:
+    app: reviews
+...
+---
+# Source: bookinfo/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  metadata:
+  name: details-v1
+  labels:
+    app: details
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: details
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: details
+        version: v1
+    spec:
+      containers:
+        - name: details
+          image: docker.io/istio/examples-bookinfo-details-v1:1.20.2
+          ports:
+            - containerPort: 9080
+          volumeMounts:
+      volumes:
+...
+---
+# Source: bookinfo/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  metadata:
+  name: ratings-v1
+  labels:
+    app: ratings
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ratings
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: ratings
+        version: v1
+    spec:
+      containers:
+        - name: ratings
+          image: docker.io/istio/examples-bookinfo-ratings-v1:1.20.2
+          ports:
+            - containerPort: 9080
+          volumeMounts:
+      volumes:
+...
+---
+# Source: bookinfo/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  metadata:
+  name: reviews-v1
+  labels:
+    app: reviews
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: reviews
+        version: v1
+    spec:
+      containers:
+        - name: reviews
+          image: docker.io/istio/examples-bookinfo-reviews-v1:1.20.2
+          ports:
+            - containerPort: 9080
+          volumeMounts:
+            - name: wlp-output
+              mountPath: /opt/ibm/wlp/output
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: wlp-output
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+...
+---
+# Source: bookinfo/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  metadata:
+  name: reviews-v2
+  labels:
+    app: reviews
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: reviews
+        version: v2
+    spec:
+      containers:
+        - name: reviews
+          image: docker.io/istio/examples-bookinfo-reviews-v2:1.20.2
+          ports:
+            - containerPort: 9080
+          volumeMounts:
+            - name: wlp-output
+              mountPath: /opt/ibm/wlp/output
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: wlp-output
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+...
+---
+# Source: bookinfo/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  metadata:
+  name: reviews-v3
+  labels:
+    app: reviews
+    version: v3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews
+      version: v3
+  template:
+    metadata:
+      labels:
+        app: reviews
+        version: v3
+    spec:
+      containers:
+        - name: reviews
+          image: docker.io/istio/examples-bookinfo-reviews-v3:1.20.2
+          ports:
+            - containerPort: 9080
+          volumeMounts:
+            - name: wlp-output
+              mountPath: /opt/ibm/wlp/output
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: wlp-output
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+...
