@@ -13,12 +13,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: {{ $name }}
-  namespace: {{ $name }}
+  namespace: argocd
 spec:
   sourceRepos:
     - "https://github.com/t-ash0410/try-k8s.git"
   destinations:
-    - namespace: "*"
+    - namespace: {{ $name }}
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: "*"
