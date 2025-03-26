@@ -1,0 +1,45 @@
+{{- range .Values.services }}
+{{- if .enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  metadata:
+  name: {{ .name }}-{{ .version }}
+  labels:
+    app: {{ .name }}
+    version: {{ .version }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .name }}
+      version: {{ .version }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+        version: {{ .version }}
+    spec:
+      containers:
+        - name: {{ .name }}
+          image: {{ .image }}
+          ports:
+            {{- range .ports }}
+            - containerPort: {{ .number }}
+            {{- end}}
+          volumeMounts:
+            {{- range .volumes }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+            {{- end}}
+      volumes:
+        {{- range .volumes }}
+        - name: {{ .name }}
+          {{- if .emptyDir }}
+          emptyDir: {}
+          {{- end}}
+        {{- end}}
+...
+{{- end }}
+{{- end }}

@@ -1,0 +1,22 @@
+{{- range .Values.services }}
+{{- if .enabled }}
+{{- $name := .name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}
+  labels:
+    app: {{ $name }}
+    service: {{ $name }}
+spec:
+  ports:
+  {{- range .ports }}
+  - name: {{ $name }}-{{ .number }}
+    port: {{ .number }}
+  {{- end}}
+  selector:
+    app: {{ $name }}
+...
+{{- end }}
+{{- end }}

@@ -5,3 +5,6 @@ projects:
   - name: nginx
     path: k8s/argocd/resources/nginx
     enabled: true
+  - name: bookinfo
+    path: k8s/argocd/resources/bookinfo
+    enabled: true
