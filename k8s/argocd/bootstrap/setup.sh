@@ -15,11 +15,11 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 ######################### Port Forwarding #########################
 
-local argocd_server=$(kubectl get replicaset -n argocd | grep argocd-server | awk '{print $1}')
+ARGOCD_SERVER=$(kubectl get replicaset -n argocd | grep argocd-server | awk '{print $1}')
 
-./wait-for-replicaset.sh $argocd_server argocd
+./wait-for-replicaset.sh $ARGOCD_SERVER argocd
 
-kubectl port-forward -n argocd replicaset/$argocd_server $LOCAL_PORT:8080 &
+kubectl port-forward -n argocd replicaset/$ARGOCD_SERVER $LOCAL_PORT:8080 &
 pf=$!
 
 for ((i=0 ; i<20 ; i++)); do
@@ -31,8 +31,8 @@ done
 
 ######################### Get Admin Password #########################
 
-local admin_secret=$(kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
-echo "ArgoCD admin password: $admin_secret"
+ADMIN_SECRET=$(kubectl -n argocd get secret/argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
+echo "ArgoCD admin password: $ADMIN_SECRET"
 
 ######################### Login #########################
 
