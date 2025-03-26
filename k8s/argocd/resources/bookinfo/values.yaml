@@ -1,0 +1,52 @@
+services:
+  - name: details
+    version: v1
+    image: docker.io/istio/examples-bookinfo-details-v1:1.20.2
+    enabled: true
+    ports:
+      - number: 9080
+  - name: ratings
+    version: v1
+    image: docker.io/istio/examples-bookinfo-ratings-v1:1.20.2
+    enabled: true
+    ports:
+      - number: 9080
+  - name: reviews
+    version: v1
+    image: docker.io/istio/examples-bookinfo-reviews-v1:1.20.2
+    enabled: true
+    ports:
+      - number: 9080
+    volumes:
+      - name: wlp-output
+        mountPath: /opt/ibm/wlp/output
+        emptyDir: true
+      - name: tmp
+        mountPath: /tmp
+        emptyDir: true
+  - name: reviews
+    version: v2
+    image: docker.io/istio/examples-bookinfo-reviews-v2:1.20.2
+    enabled: true
+    ports:
+      - number: 9080
+    volumes:
+      - name: wlp-output
+        mountPath: /opt/ibm/wlp/output
+        emptyDir: true
+      - name: tmp
+        mountPath: /tmp
+        emptyDir: true
+  - name: reviews
+    version: v3
+    image: docker.io/istio/examples-bookinfo-reviews-v3:1.20.2
+    enabled: true
+    ports:
+      - number: 9080
+    volumes:
+      - name: wlp-output
+        mountPath: /opt/ibm/wlp/output
+        emptyDir: true
+      - name: tmp
+        mountPath: /tmp
+        emptyDir: true
